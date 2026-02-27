@@ -9,7 +9,7 @@ pipeline {
 
         stage('Deploy to Docker EC2') {
             steps {
-                sshagent(['docker-ec2-key']) {
+                sshagent(['jenkins-ec2-key']) {
                     sh '''
                     ssh -o StrictHostKeyChecking=no $DOCKER_SERVER "
                         cd /home/ubuntu &&
