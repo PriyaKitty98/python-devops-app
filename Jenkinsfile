@@ -1,32 +1,19 @@
 pipeline {
     agent any
 
-    environment {
-        DOCKER_HOST_IP = "3.108.65.83"
-    }
-
     stages {
 
-        stage('Clone Code') {
+        stage('Build Docker Image') {
             steps {
-                git 'https://github.com/PriyaKitty98/python-devops-app.git'
+                bat 'docker build -t python-devops-app:v1 .'
             }
         }
 
         stage('Deploy to Docker EC2') {
             steps {
-                sshagent(['jenkins-ec2-key']) {
-                    sh """
-                    ssh -o StrictHostKeyChecking=no ubuntu@${DOCKER_HOST_IP} '
-                    cd ~/python-devops-app &&
-                    git pull &&
-                    docker stop python-app || true &&
-                    docker rm python-app || true &&
-                    docker build -t python-app . &&
-                    docker run -d -p 5000:5000 --name python-app python-app
-                    '
-                    """
-                }
+                bat 'docker stop python-app || true'
+                bat 'docker rm python-app || true'
+                bat 'docker run -d -p 5000:5000 --name python-app python-devops-app:v1'
             }
         }
     }
