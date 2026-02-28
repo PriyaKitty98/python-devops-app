@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_SERVER = "172.31.10.88"
+        DOCKER_SERVER = "ubuntu@172.31.10.88"
     }
 
     stages {
