@@ -9,7 +9,7 @@ REQUEST_COUNT = Counter('app_requests_total', 'Total App HTTP Requests')
 @app.route("/")
 def home():
     REQUEST_COUNT.inc()
-    return  "CI/CD Deployment Successful for 28/02/2026"
+    return  "CI/CD Deployment Successful. This is suriya"
 
 @app.route("/metrics")
 def metrics():
