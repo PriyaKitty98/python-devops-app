@@ -10,7 +10,7 @@ pipeline {
 
         stage('Clone Code') {
             steps {
-                git branch 'main', url: 'https://github.com/PriyaKitty98/python-devops-app.git'
+                git branch: 'main', url: 'https://github.com/PriyaKitty98/python-devops-app.git'
             }
         }
 
